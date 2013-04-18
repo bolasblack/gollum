@@ -82,7 +82,9 @@ module Precious
     end
 
     before do
-      @base_url = url('/', false).chomp('/')
+      # @base_url = url('/', false).chomp('/')
+      prefix_path = settings.wiki_options[:prefix_path]
+      @base_url = prefix_path.nil? ? "/" : prefix_path
       # above will detect base_path when it's used with map in a config.ru
       settings.wiki_options.merge!({ :base_path => @base_url })
       @css = settings.wiki_options[:css]
@@ -91,7 +93,8 @@ module Precious
 
     get '/' do
       page_dir = settings.wiki_options[:page_file_dir].to_s
-      redirect clean_url(::File.join(@base_url, page_dir, wiki_new.index_page))
+      # redirect clean_url(::File.join(@base_url, page_dir, wiki_new.index_page))
+      redirect clean_url(::File.join('/', page_dir, wiki_new.index_page))
     end
 
     # path is set to name if path is nil.

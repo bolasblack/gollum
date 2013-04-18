@@ -65,6 +65,10 @@ opts = OptionParser.new do |opts|
     wiki_options[:gollum_path] = path
   end
 
+  opts.on("--prefix-path [PATH]", "Wiki path") do |path|
+    wiki_options[:prefix_path] = path
+  end
+
   opts.on("--ref [REF]", "Specify the repository ref to use (default: master).") do |ref|
     wiki_options[:ref] = ref
   end
